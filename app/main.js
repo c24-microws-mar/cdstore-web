@@ -11,8 +11,9 @@ const DISCOVERY_SERVERS = [
 const client = agent.client({
   discovery: 'consul',
   discoveryServers: DISCOVERY_SERVERS,
-  discoveryStrategy: 'sequentially',
-  serviceName: 'example-service'
+  discoveryStrategy: 'randomly',
+  serviceName: 'example-service',
+  serviceStrategy: 'randomly'
 });
 
 client.get('/superstars').end(function (err, res) {
