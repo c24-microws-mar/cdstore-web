@@ -13,7 +13,7 @@ const minimist = require('minimist');
 const uglify = require('gulp-uglify');
 const buffer = require('vinyl-buffer');
 const browserify = require('browserify');
-const sequence = require('run-sequence');
+const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const livereload = require('gulp-livereload');
@@ -81,7 +81,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('build', function (done) {
-  sequence('clean', ['scripts', 'styles', 'html'], done);
+  runSequence('clean', ['scripts', 'styles', 'html'], done);
 });
 
 gulp.task('test', function () {
