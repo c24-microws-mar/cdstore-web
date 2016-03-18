@@ -2,6 +2,7 @@ import $ from 'jquery';
 import catalogService from './services/catalog-service';
 import cdItemView from './views/cd-item-view';
 import buyButtonView from './views/buy-button-view';
+import orderButtonView from './views/order-button-view';
 import page from 'page';
 
 page.base('/');
@@ -31,10 +32,10 @@ function cart(cartId) {
   catalogService
     .getAllCds()
     .then(cdList => {
+      orderButtonView.render(mainApp);
       cdList.forEach(cd => {
         const line = $('<div></div>').appendTo(mainApp)
-
         cdItemView.render(line, cd);
-    });
+      });
   });
 }
