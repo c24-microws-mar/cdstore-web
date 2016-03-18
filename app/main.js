@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import catalogService from './catalog-service';
+import catalogService from './services/catalog-service';
 import cdItemView from './views/cd-item-view';
 import buyButtonView from './views/buy-button-view';
 

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import cartService from './../cart-service';
+import cartService from './../services/cart-service';
 
 export default {
   render: (baseElement, id) => {
