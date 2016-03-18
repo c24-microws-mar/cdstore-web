@@ -17,8 +17,6 @@ export default {
               const cartId = res.body.cartId;
               console.log('done posting to cart service.', cartId);
               resolve(cartId);
-              // currentCartId = 123456;
-              // resolve(12345)
             } else {
 
             }
