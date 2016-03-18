@@ -5,7 +5,7 @@ export default {
     const suggestionsClient = serviceDiscovery.getClient('suggestions-service', 'v2');
     return new Promise(function(resolve, reject) {
       suggestionsClient
-        .get('/suggestions')
+        .get(`/suggestions?releaseId=${albumId}`)
         .end(function (err, res) {
           if (res.body && res.body.length) {
             resolve(res.body);

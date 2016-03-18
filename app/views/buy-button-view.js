@@ -4,7 +4,7 @@ import page from 'page';
 
 export default {
   render: (baseElement, id) => {
-    $('<button>Buy Me!</button>')
+    $('<td><button>Buy Me!</button></td>')
       .click(OnBuyButton)
       .data('id', id)
       .appendTo(baseElement)

@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import catalogService from './services/catalog-service';
+import suggestionService from './services/suggestion-service';
 import cdItemView from './views/cd-item-view';
 import buyButtonView from './views/buy-button-view';
 import orderButtonView from './views/order-button-view';
@@ -18,8 +19,9 @@ function search() {
     .getAllCds()
     .then(cdList => {
       cdList.forEach(cd => {
-        const line = $('<div></div>').appendTo(mainApp)
-
+        const table = $('<table></table>').appendTo(mainApp)
+        const line = $('<tr></tr>').appendTo(table)
+        
         buyButtonView.render(line, cd.albumId);
         cdItemView.render(line, cd);
     });
@@ -32,10 +34,31 @@ function cart(cartId) {
   catalogService
     .getAllCds()
     .then(cdList => {
-      orderButtonView.render(mainApp);
+      const headLine = $('<div><h2>Cart</h2></div>').appendTo(mainApp)
+	  orderButtonView.render(mainApp);
       cdList.forEach(cd => {
-        const line = $('<div></div>').appendTo(mainApp)
+        const table = $('<table></table>').appendTo(mainApp)
+        const line = $('<tr></tr>').appendTo(table)
+
         cdItemView.render(line, cd);
-      });
-  });
+      })
+
+      return cdList;
+    })
+    .then(cdList => {
+      if (cdList && cdList.length) {
+        suggestionService.getSuggestions(cdList[0])
+          .then(suggestions => {
+            const headLine = $('<div><h2>Suggestions</h2></div>').appendTo(mainApp)
+            console.log('received suggestions', suggestions);
+            suggestions.forEach(suggestion => {
+              const table = $('<table></table>').appendTo(mainApp)
+              const line = $('<tr></tr>').appendTo(table)
+              
+              buyButtonView.render(line, suggestion.albumId);
+              cdItemView.render(line, suggestion);
+            })
+          });
+      }
+    });
 }
