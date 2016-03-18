@@ -6,15 +6,14 @@ import page from 'page';
 export default {
   render: (baseElement, cartId) => {
     $('<button>Order and enjoy!</button>')
-      .click(OnOrderButton)
+      .click(OnOrderButton.bind(cartId))
       .appendTo(baseElement)
   }
 }
 
-function OnOrderButton(event) {
-  const fakeCardId = '';
+function OnOrderButton(event, cartId) {
   notificationService
-    .sendNotification(person, fakeCardId)
+    .sendNotification(person, cartId)
     .then(() => {
       page('/#thankYou');
     });

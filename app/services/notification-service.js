@@ -6,6 +6,7 @@ export default {
     return new Promise(function(resolve, reject) {
       notificationClient
         .post('/order-notification')
+        .send({ 'person': person, 'cart_id': cart_id })
         .end(function (err, res) {
         });
       });
