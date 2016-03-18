@@ -28,13 +28,14 @@ function search() {
   });
 }
 
-function cart(cartId) {
+function cart(context) {
   const mainApp = $('#mainApp').empty();
-  
+  const cartIdParam = context.querystring;
+  const cartId = cartIdParam.substring(7, cartIdParam.length);
   catalogService
     .getAllCds()
     .then(cdList => {
-	orderButtonView.render(mainApp);
+	orderButtonView.render(mainApp, cartId);
     const headLine = $('<div><h2>Cart</h2></div>').appendTo(mainApp)
       cdList.slice(0, 3).forEach(cd => {
         const table = $('<table></table>').appendTo(mainApp)
