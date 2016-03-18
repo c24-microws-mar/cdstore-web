@@ -32,8 +32,9 @@ function cart(cartId) {
   catalogService
     .getAllCds()
     .then(cdList => {
+      const headLine = $('<div><h1>Cart</h1></div>').appendTo(mainApp)
       cdList.forEach(cd => {
-        const line = $('<div></div>').appendTo(mainApp)
+        const line = $('<div></div>').appendTo(headLine)
 
         cdItemView.render(line, cd);
       })
@@ -44,7 +45,12 @@ function cart(cartId) {
       if (cdList && cdList.length) {
         suggestionService.getSuggestions(cdList[0])
           .then(suggestions => {
-            console.log(suggestions);
+            const headLine = $('<div><h1>Suggestions</h1></div>').appendTo(mainApp)
+            console.log('received suggestions', suggestions);
+            suggestions.forEach(suggestion => {
+              const line = $('<div></div>').appendTo(headLine)
+              cdItemView.render(line, suggestion);
+            })
           });
       }
     });
