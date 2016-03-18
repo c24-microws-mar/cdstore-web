@@ -33,8 +33,8 @@ function cart(cartId) {
   catalogService
     .getAllCds()
     .then(cdList => {
-      const headLine = $('<div><h2>Cart</h2></div>').appendTo(mainApp)
-      cdList.forEach(cd => {
+    const headLine = $('<div><h2>Cart</h2></div>').appendTo(mainApp)
+      cdList.slice(0, 3).forEach(cd => {
         const table = $('<table></table>').appendTo(mainApp)
         const line = $('<tr></tr>').appendTo(table)
 
@@ -47,7 +47,7 @@ function cart(cartId) {
       if (cdList && cdList.length) {
         suggestionService.getSuggestions(cdList[0])
           .then(suggestions => {
-            const headLine = $('<div><h2>Suggestions</h2></div>').appendTo(mainApp)
+          const headLine = $('<div><h2>Suggestions</h2></div>').appendTo(mainApp)
             console.log('received suggestions', suggestions);
             suggestions.forEach(suggestion => {
               const table = $('<table></table>').appendTo(mainApp)

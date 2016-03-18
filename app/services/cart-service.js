@@ -1,10 +1,7 @@
 import serviceDiscovery from './service-discovery';
 
-let currentCartId = undefined;
-
 export default {
   addItem: (id) => {
-    if (!currentCartId) {
       console.log("Trying to post to cart service with id", id);
 
       const cartClient = serviceDiscovery.getClient('cart-service');
@@ -18,12 +15,9 @@ export default {
               console.log('done posting to cart service.', cartId);
               resolve(cartId);
             } else {
-
+              reject();
             }
           });
         });
-      } else {
-        return Promise.resolve(currentCartId);
-      }
     }
 }
