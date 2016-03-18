@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import cartService from './../services/cart-service';
+import page from 'page';
 
 export default {
   render: (baseElement, id) => {
@@ -12,5 +13,9 @@ export default {
 
 function OnBuyButton(event) {
   const id = $(this).data('id');
-  cartService.addItem(id);
+  cartService
+    .addItem(id)
+    .then((cartId) => {
+      page('/#cart?cartId=' + cartId);
+    });
 }

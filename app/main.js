@@ -17,7 +17,6 @@ function search() {
     .getAllCds()
     .then(cdList => {
       cdList.forEach(cd => {
-        //$('<a href="#cart">CART</a>').appendTo('body')
         const line = $('<div></div>').appendTo(mainApp)
 
         buyButtonView.render(line, cd.albumId);
@@ -28,4 +27,14 @@ function search() {
 
 function cart(cartId) {
   const mainApp = $('#mainApp').empty();
+  
+  catalogService
+    .getAllCds()
+    .then(cdList => {
+      cdList.forEach(cd => {
+        const line = $('<div></div>').appendTo(mainApp)
+
+        cdItemView.render(line, cd);
+    });
+  });
 }

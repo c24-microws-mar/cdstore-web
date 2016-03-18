@@ -10,9 +10,13 @@ export default {
         .post('/carts')
         .send({ 'itemId': id, count: 1 })
         .end(function (err, res) {
-          if (res.body && res.body.length) {
-            console.log('done posting to cart service. CartId', cartId);
-            resolve(res.body.cartId);
+          if (res.text && res.text.length) {
+            //const cartId = JSON.stringify(res.text.cartId);
+            //console.log('done posting to cart service.', cartId);
+            //resolve(cartId);
+            resolve(12345)
+          } else {
+
           }
         });
       });
