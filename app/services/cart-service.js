@@ -8,8 +8,12 @@ export default {
     return new Promise(function(resolve, reject) {
       cartClient
         .post('/carts')
+        .send({ 'itemId': id, count: 1 })
         .end(function (err, res) {
-          console.log('done posting to cart service');
+          if (res.body && res.body.length) {
+            console.log('done posting to cart service. CartId', cartId);
+            resolve(res.body.cartId);
+          }
         });
       });
     }
