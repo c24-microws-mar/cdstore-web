@@ -13,6 +13,7 @@
     "watch": "gulp watch"
   },
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-endpoints": "^1.0.0",
