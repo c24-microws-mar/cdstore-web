@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import cdStoreService from './cd-store-service';
-
+import cartService from './cart-service';
 
 cdStoreService
   .getAllCds()
@@ -21,5 +21,6 @@ cdStoreService
 });
 
 function OnBuyButton(event) {
-  console.log("bought id", $(this).data('id'));
+  const id = $(this).data('id');
+  cartService.addItem(id);
 }
