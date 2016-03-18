@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import catalogService from './services/catalog-service';
+import suggestionService from './services/suggestion-service';
 import cdItemView from './views/cd-item-view';
 import buyButtonView from './views/buy-button-view';
 import page from 'page';
@@ -35,6 +36,16 @@ function cart(cartId) {
         const line = $('<div></div>').appendTo(mainApp)
 
         cdItemView.render(line, cd);
+      })
+
+      return cdList;
+    })
+    .then(cdList => {
+      if (cdList && cdList.length) {
+        suggestionService.getSuggestions(cdList[0])
+          .then(suggestions => {
+            console.log(suggestions);
+          });
+      }
     });
-  });
 }
