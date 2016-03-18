@@ -2,7 +2,7 @@ import agent from 'multiagent';
 
 export default {
 
-  getClient: (serviceName, tags) => {
+  getClient: (serviceName, tag) => {
     const DISCOVERY_SERVERS = [
       'http://46.101.245.190:8500',
       'http://46.101.132.55:8500',
@@ -17,8 +17,8 @@ export default {
       serviceStrategy: 'randomly'
     };
 
-    if (tags) {
-      options.createConsulRequestPath = serviceName => `/v1/health/service/${encodeURIComponent(serviceName)}?passing=true&tags=${tags}`
+    if (tag) {
+      options.createConsulRequestPath = serviceName => `/v1/health/service/${encodeURIComponent(serviceName)}?passing=true&tag=${tag}`
     }
 
     return agent.client(options);
