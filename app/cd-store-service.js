@@ -1,18 +1,16 @@
-export default {
-  getAllCds: () => { 
-    return new Promise(function(resolve, reject) {
-      const testData = [
-        {
-          name: "CD1",
-          price: 12.99
-        },
-        {
-          name: "CD2",
-          price: 4.99
-        }
-      ];
+import serviceDiscovery from './service-discovery';
 
-      resolve(testData);
-    }); 
-  }
+export default {
+  getAllCds: () => {
+    const catalogClient = serviceDiscovery.getClient('catalog-service');
+    return new Promise(function(resolve, reject) {
+      catalogClient
+        .get('/cds')
+        .end(function (err, res) {
+          if (res.body && res.body.length) {
+            resolve(res.body);
+          }
+        });
+      });
+    }
 };
